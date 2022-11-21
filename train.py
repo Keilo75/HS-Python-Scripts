@@ -73,15 +73,15 @@ def train(config):
         image = scale_to_1(image)
 
         if data_augmentation_mode == "one":
-            if "brightness" in data_augmentation_methods:
+            if "bri" in data_augmentation_methods:
                 image = tf.image.random_brightness(image, 0.2)  # brightness
-            if "contrast" in data_augmentation_methods:
+            if "con" in data_augmentation_methods:
                 image = tf.image.random_contrast(image, 0.5, 2.0)  # contrast
-            if "saturation" in data_augmentation_methods:
+            if "sat" in data_augmentation_methods:
                 image = tf.image.random_saturation(image, 0.75, 1.25)  # saturation
             if "hue" in data_augmentation_methods:
                 image = tf.image.random_hue(image, 0.1)  # hue
-            if "flip_left_right" in data_augmentation_methods:
+            if "flr" in data_augmentation_methods:
                 image = tf.image.random_flip_left_right(image)  # flip
 
             image = scale_to_255(image)
@@ -89,15 +89,15 @@ def train(config):
         elif data_augmentation_mode == "multiple":
             images = [scale_to_255(image)]
 
-            if "brightness" in data_augmentation_methods:
+            if "bri" in data_augmentation_methods:
                 images.append(scale_to_255(tf.image.random_brightness(image, 0.2)))
-            if "contrast" in data_augmentation_methods:
+            if "con" in data_augmentation_methods:
                 images.append(scale_to_255(tf.image.random_contrast(image, 0.5, 2.0)))
-            if "saturation" in data_augmentation_methods:
+            if "sat" in data_augmentation_methods:
                 images.append(scale_to_255(tf.image.random_saturation(image, 0.75, 1.25)))
             if "hue" in data_augmentation_methods:
                 images.append(scale_to_255(tf.image.random_hue(image, 0.1)))
-            if "flip_left_right" in data_augmentation_methods:
+            if "flr" in data_augmentation_methods:
                 images.append(scale_to_255(tf.image.random_flip_left_right(image)))
 
             labels = tf.repeat(label, repeats=len(data_augmentation_methods) + 1)
